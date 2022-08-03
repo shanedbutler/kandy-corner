@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import "./Login.css"
 
 export const Login = () => {
-    const [email, set] = useState("")
+    const [email, set] = useState("fslator8@51.la")
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
