@@ -1,4 +1,4 @@
-.locations {
+.products {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -6,9 +6,9 @@
     margin-top: 20px;
 }
 
-.location__card {
-    background-color: rgb(210, 254, 235);
-    border: 1px dotted rgb(118, 245, 190);
+.product__card {
+    background-color: blanchedalmond;
+    border: 1px dotted rgb(245, 188, 118);
     margin: 10px 5px 0px 5px;
     padding: .4rem;
 }
