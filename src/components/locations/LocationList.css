@@ -7,8 +7,8 @@
 }
 
 .location__card {
-    background-color: blanchedalmond;
-    border: 1px dotted rgb(245, 188, 118);
+    background-color: rgb(210, 254, 235);
+    border: 1px dotted rgb(118, 245, 190);
     margin: 10px 5px 0px 5px;
     padding: .4rem;
 }
