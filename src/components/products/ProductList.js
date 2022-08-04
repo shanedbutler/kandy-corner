@@ -15,7 +15,7 @@ export const ProductList = () => {
     const [products, setProducts] = useState([])
     const [productTypes, setProductTypes] = useState([])
     
-    //fetch products
+    //fetch from api
     useEffect(() => {
         fetch("http://localhost:8088/products")
             .then(response => response.json())
@@ -42,7 +42,7 @@ export const ProductList = () => {
             {
                 kandyUserObject.staff ?
                     <>
-                        <button onClick={() => navigate("/product/create", productTypes)}>Create Product</button>
+                        <button onClick={() => navigate("/product/create")}>Create Product</button>
                     </>
                     : //else user is non staff
                     <>

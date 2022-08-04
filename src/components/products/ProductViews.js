@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { ProductList } from "./ProductList"
 
+//COMPONENT CURRENTLY UNUSED
+
     export const ProductViews = () => {
 
         const [productArray, setProductArray] = useState([])
