@@ -68,7 +68,7 @@ export const ProductForm = () => { //TODO = pass types through via prop through 
                     <select required
                         onChange={(e) => {
                             const newProduct = { ...userInput }
-                            newProduct.productTypeId = +e.target.value //TODO: value not getting set
+                            newProduct.productTypeId = +e.target.value
                             setUserInput(newProduct)
                         }}>
                         <option value={0}>Select...</option>
