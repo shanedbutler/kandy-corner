@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
+import "./ProductForm.css"
 
 export const ProductForm = () => { //TODO = pass types through via prop through useNavigate
 
@@ -15,11 +16,13 @@ export const ProductForm = () => { //TODO = pass types through via prop through 
 
     useEffect(() => {
         fetch("http://localhost:8088/productTypes")
-        .then(response => response.json())
-        .then(productTypesArray => setProductTypes(productTypesArray))
+            .then(response => response.json())
+            .then(productTypesArray => setProductTypes(productTypesArray))
     }, [])
 
-    const submitProduct = (product) => {
+    const submitProduct = (event, product) => {
+        event.preventDefault()
+
         if (product.name && product.price && product.productTypeId) {
             fetch("http://localhost:8088/products", {
                 method: "POST",
@@ -36,35 +39,50 @@ export const ProductForm = () => { //TODO = pass types through via prop through 
     }
 
     return (
-        <>
-            <label>Name: </label>
-            <input type="text"
-                onChange={(e) => {
-                    const newProduct = { ...userInput }
-                    newProduct.name = e.target.value
-                    setUserInput(newProduct)
-                }} />
-            <label>Price: </label>
-            <input type="number"
-                onChange={(e) => {
-                    const newProduct = { ...userInput }
-                    newProduct.price = +e.target.value
-                    setUserInput(newProduct)
-                }} />
-            <label>Type: </label>
-            <select
-                onChange={(e) => {
-                    const newProduct = { ...userInput }
-                    newProduct.productTypeId = +e.target.value //TODO: value not getting set
-                    setUserInput(newProduct)
-                }}>
-                <option value={0}>Select...</option>
+        <form>
+            <fieldset>
+                <legend>New Product:</legend>
 
-                {productTypes.map((type) => {
-                    return <option key={type.id} value={type.id}>{type.name}</option>
-                })}
-            </select>
-            <button onClick={(clickEvent) => submitProduct(userInput)}>Submit Product</button>
-        </>
+                <div className="form-group">
+                    <label>Name: </label>
+                    <input type="text" required autoFocus
+                        onChange={(e) => {
+                            const newProduct = { ...userInput }
+                            newProduct.name = e.target.value
+                            setUserInput(newProduct)
+                        }} />
+                </div>
+
+                <div className="form-group">
+                    <label>Price: </label>
+                    <input type="number" required min={0}
+                        onChange={(e) => {
+                            const newProduct = { ...userInput }
+                            newProduct.price = +e.target.value
+                            setUserInput(newProduct)
+                        }} />
+                </div>
+                <div className="form-group">
+
+                    <label>Type: </label>
+                    <select required
+                        onChange={(e) => {
+                            const newProduct = { ...userInput }
+                            newProduct.productTypeId = +e.target.value //TODO: value not getting set
+                            setUserInput(newProduct)
+                        }}>
+                        <option value={0}>Select...</option>
+
+                        {productTypes.map((type) => {
+                            return <option key={type.id} value={type.id}>{type.name}</option>
+                        })}
+                    </select>
+                </div>
+
+                <div className="form-group">
+                    <button onClick={(clickEvent) => submitProduct(clickEvent, userInput)}>Submit Product</button>
+                </div>
+            </fieldset>
+        </form>
     )
 }

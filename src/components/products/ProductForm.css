@@ -1,0 +1,18 @@
+fieldset {
+    background-color: lightpink;
+  }
+  
+  legend {
+    background-color: rgb(177, 12, 108);
+    color: white;
+    padding: 5px 10px 5px 10px;
+  }
+  
+  input, select, label {
+    margin: .5rem .5rem .5rem .5rem;
+  }
+
+  
+  button {
+    margin: 1rem 1rem 1rem 1rem;
+  }
