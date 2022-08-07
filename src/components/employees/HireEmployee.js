@@ -17,7 +17,7 @@ export const HireEmployee = () => {
     useEffect(() => {
         fetch("http://localhost:8088/users")
             .then(response => response.json())
-            .then(usersArray => setUsersLength(usersArray.length))
+            .then(usersArray => setUsersLength(usersArray.length + 1))
     }, [])
 
 
