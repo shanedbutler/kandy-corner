@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import "./CustomerList.css"
 
 export const CustomerList = () => {
@@ -30,7 +31,9 @@ export const CustomerList = () => {
                 return (
                     <section className="customer__card" key={customer.id}>
                         <div onClick={(e) => toggleDetails(e, showDetails, customer.id)}>
-                            <div>{customer.user.fullName}</div>
+                        <header>
+                            <Link to={`/customers/${customer.id}/edit-loyalty`}>{customer.user.fullName}</Link>
+                        </header>
                             <div>Email: {customer.user.email}</div>
                             {showDetails === customer.id ? 
                             <div>Loyalty Number: {customer.loyaltyNumber}</div> 
