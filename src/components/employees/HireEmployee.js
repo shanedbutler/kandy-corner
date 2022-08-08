@@ -6,20 +6,12 @@ export const HireEmployee = () => {
     const navigate = useNavigate()
 
     const [locations, setLocations] = useState([])
-    const [usersLength, setUsersLength] = useState()
 
     useEffect(() => {
         fetch("http://localhost:8088/locations")
             .then(response => response.json())
             .then(locationsArray => setLocations(locationsArray))
     }, [])
-
-    useEffect(() => {
-        fetch("http://localhost:8088/users")
-            .then(response => response.json())
-            .then(usersArray => setUsersLength(usersArray.length + 1))
-    }, [])
-
 
     const [userInput, setUserInput] = useState({
         fullName: "",
@@ -34,7 +26,7 @@ export const HireEmployee = () => {
         locationId: 0
     })
 
-    const submit = (event, user, employee) => {
+    const submit = (event, user) => {
         event.preventDefault()
 
         //post user data
@@ -45,7 +37,14 @@ export const HireEmployee = () => {
             },
             body: JSON.stringify(user)
         })
-            .then(() => submitEmployee(employee))
+            .then(response => response.json())
+
+            .then((newUserObject) => {
+                const newEmployee = { ...employeeInput }
+                newEmployee.userId = newUserObject.id
+
+                submitEmployee(newEmployee)
+            })
     }
 
     const submitEmployee = (employee) => {
@@ -58,7 +57,6 @@ export const HireEmployee = () => {
             },
             body: JSON.stringify(employee)
         })
-
             .then(() => navigate("/employees"))
     }
 
@@ -99,7 +97,6 @@ export const HireEmployee = () => {
                         onChange={(e) => {
                             const newEmployee = { ...employeeInput }
                             newEmployee.startDate = e.target.value
-                            newEmployee.userId = usersLength
                             setEmployeeInput(newEmployee)
                         }} />
                 </div>
@@ -134,11 +131,9 @@ export const HireEmployee = () => {
                 </div>
 
                 <div className="form-group">
-                    <button onClick={(clickEvent) => submit(clickEvent, userInput, employeeInput)}>Submit Employee</button>
+                    <button onClick={(clickEvent) => submit(clickEvent, userInput)}>Submit Employee</button>
                 </div>
             </fieldset>
         </form>
     )
 }
-
-//clickEvent function argument question: since userInput and userEmployeeInput are already set in state, do they need to be passed into the submit function?
