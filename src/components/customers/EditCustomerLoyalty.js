@@ -46,7 +46,7 @@ export const EditCustomerLoyalty = () => {
                             onChange={
                                 (e) => {
                                     const customerCopy = { ...customer }
-                                    customerCopy.loyaltyNumber = e.target.value
+                                    customerCopy.loyaltyNumber = +e.target.value
                                     setCustomer(customerCopy)
                                 }
                             } />
